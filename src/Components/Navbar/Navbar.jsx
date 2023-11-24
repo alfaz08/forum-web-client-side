@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 
 
@@ -55,7 +55,9 @@ const Navbar = () => {
            
          
         </li>
-        <li><a>Settings</a></li>
+        <Link to='/dashboard/userHome'>
+        <li><a>Dashboard</a></li>
+        </Link>
         <li><a>Logout</a></li>
       </ul>
     </div>
