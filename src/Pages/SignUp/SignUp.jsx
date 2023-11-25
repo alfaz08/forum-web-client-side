@@ -6,13 +6,16 @@ import Swal from "sweetalert2";
 import SocialLogin from "../../shared/SocialLogin/SocialLogin";
 import { useState } from "react";
 
+import { ToastContainer, toast } from 'react-toastify';
+
+
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const SignUp = () => {
   const { createUser,updateUserProfile } = useAuth();
   const axiosPublic = useAxiosPublic();
-  const navigate =useNavigate()
+  // const navigate =useNavigate()
   const [loggedIn,setLoggedIn] =useState(false)
   const {
     register,
@@ -59,7 +62,8 @@ const SignUp = () => {
           setLoggedIn(true)
         }
       } catch (error) {
-        console.log(error);
+        toast.error(error.message)
+        reset()
       }
     }
   };
@@ -175,6 +179,7 @@ const SignUp = () => {
           
         </div>
       </div>
+      <ToastContainer/>
       </div>
     </>
   );

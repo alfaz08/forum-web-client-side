@@ -8,9 +8,9 @@ import { FaCommentAlt } from "react-icons/fa";
 import { MdAddAlert } from "react-icons/md";
 
 const Dashboard = () => {
+   
 
-
-  const isAdmin =false
+  const isAdmin =true
 
   return (
     <div className="flex">
