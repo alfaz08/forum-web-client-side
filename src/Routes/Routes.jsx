@@ -10,6 +10,8 @@ import ReportComment from "../Pages/Dashboard/Admin/ReportComment/ReportComment"
 import Announcement from "../Components/Announcement/Anouncement";
 import AddPost from "../Pages/Dashboard/Users/AddPost/AddPost";
 import MyPost from "../Pages/Dashboard/Users/MyPost/MyPost";
+import Login from "../Pages/Login/Login";
+import SignUp from "../Pages/SignUp/SignUp";
 
 
 const router = createBrowserRouter([
@@ -21,7 +23,15 @@ const router = createBrowserRouter([
     {
       path: "/",
       element: <Home></Home>,
-    }
+    },
+    {
+      path: "/login",
+      element: <Login></Login>,
+    },
+    {
+      path: "/signUp",
+      element: <SignUp></SignUp>,
+    },
    ]
   },
 

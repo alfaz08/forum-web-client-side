@@ -13,7 +13,7 @@ const Navbar = () => {
           <MdOutlineNotificationsActive className="mr-2 text-xl" />
         </div>
       </li>
-      <li><NavLink to="/register">Join US</NavLink></li>
+      <li><NavLink to="/login">Join US</NavLink></li>
     </>
   );
   
