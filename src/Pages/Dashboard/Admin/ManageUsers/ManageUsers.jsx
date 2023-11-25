@@ -1,12 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hooks/userAxiosSecure";
 import { FaUsers } from "react-icons/fa6";
+import Swal from "sweetalert2";
 
 
 const ManageUsers = () => {
   const axiosSecure =useAxiosSecure()
 
-  const {data: users=[]} =useQuery({
+  const {data: users=[],refetch} =useQuery({
     queryKey: ['users'],
     queryFn:async()=>{
       const res = await axiosSecure.get('/users')
@@ -14,7 +15,22 @@ const ManageUsers = () => {
     }
   })
 
- const handleMakeAdmin = data=>{
+ const handleMakeAdmin = user =>{
+  console.log(user);
+   axiosSecure.patch(`/users/admin/${user._id}`)
+   .then(res=>{
+    console.log(res.data);
+    if(res.data.modifiedCount>0){
+      refetch()
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: `${user.name} is an Admin Now!`,
+        showConfirmButton: false,
+        timer: 500,
+      });
+    }
+   })
 
  }
 
@@ -47,12 +63,15 @@ const ManageUsers = () => {
         <td>{user.name}</td>
         <td>{user.email}</td>
         <td>
-          <button 
+          {
+            user.role==='admin'? 'Admin' : 
+            <button 
           onClick={()=>handleMakeAdmin(user)}
           className="btn btn-lg bg-amber-500 hover:text-white hover:bg-black">
           <FaUsers className="text-white text-2xl"></FaUsers>
 
           </button>
+          }
         </td>
         <td>{user.badge}</td>
       </tr>
