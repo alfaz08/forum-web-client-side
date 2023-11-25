@@ -21,14 +21,14 @@ const Navbar = () => {
 
   const navLinks = (
     <>
-      <li className=""><NavLink to="/">Home</NavLink></li>
-      <li><NavLink to="/membership">Membership</NavLink></li>
-      <li>
+      <li className="text-xl"><NavLink to="/">Home</NavLink></li>
+      <li className="text-xl"><NavLink to="/membership">Membership</NavLink></li>
+      <li >
         <div >
-          <MdOutlineNotificationsActive className="mr-2 text-xl" />
+          <MdOutlineNotificationsActive className="mr-2 text-4xl" />
         </div>
       </li>
-      <li><NavLink to="/login">Join US</NavLink></li>
+      <li className="text-xl"><NavLink to="/contact" >Contact</NavLink></li>
     </>
   );
   
@@ -75,14 +75,14 @@ const Navbar = () => {
             {user.displayName}
         </li>
         <Link to='/dashboard'>
-        <li><a>Dashboard</a></li>
+        <li><a className="hover:bg-warning">Dashboard</a></li>
         </Link>
-        <li onClick={handleLogOut}><a>Logout</a></li>
+        <li onClick={handleLogOut}><a className="hover:bg-warning">Logout</a></li>
       </ul>
     </div>
     :
     <div>
-      <Link to="/login">Join US</Link>
+      <Link to="/login" className="text-2xl font-bold">Join US</Link>
     </div>
   }
 

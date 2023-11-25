@@ -12,6 +12,9 @@ import AddPost from "../Pages/Dashboard/Users/AddPost/AddPost";
 import MyPost from "../Pages/Dashboard/Users/MyPost/MyPost";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
+import MemberShip from "../Pages/MemberShip/MemberShip";
+import PrivateRoute from "./PrivateRoute";
+import Contact from "../Pages/Contact/Contact";
 
 
 const router = createBrowserRouter([
@@ -31,6 +34,14 @@ const router = createBrowserRouter([
     {
       path: "/signUp",
       element: <SignUp></SignUp>,
+    },
+    {
+      path: "/membership",
+      element: <PrivateRoute><MemberShip></MemberShip></PrivateRoute>,
+    },
+    {
+      path: "/contact",
+      element: <Contact></Contact>,
     },
    ]
   },

@@ -4,6 +4,7 @@ import { FaGooglePlusG } from "react-icons/fa";
 import { ToastContainer, toast } from 'react-toastify';
  import 'react-toastify/dist/ReactToastify.css';
 import useAuth from "../../hooks/useAuth";
+import SocialLogin from "../../shared/SocialLogin/SocialLogin";
 
 
 const Login = () => {
@@ -72,7 +73,7 @@ const Login = () => {
          
         </div>
         <div className="form-control mt-6">
-        <button  className="btn border-black  bg-custom-color text-black hover:bg-black hover:text-white">Login</button>
+        <button  className="btn   bg-custom-color text-black btn-warning hover:bg-black hover:text-white">Login</button>
         </div>
       </form>
 
@@ -80,18 +81,12 @@ const Login = () => {
 
       <p className="text-center mt-4 mb-4 ">
         <span className="text-xl font-semibold ">Don't have an account please</span>
-        <Link to="/signUp"  className=" font-bold text-blue-600 text-xl hover:text-white"> Register</Link>
+        <Link to="/signUp"  className=" font-bold text-blue-600 text-xl hover:text-red-600"> Register</Link>
       </p>
 
 
-      <div className="flex items-center justify-center">
-     <hr className="mr-2 ml-4 w-36 border-black" />
-      <span>or</span>
-      <hr className="ml-2 mr-4 w-36 border-black"/>
-     </div>
-     <div className="text-center mb-4 mt-4 ">
-      <button    className=" text-amber-400 font-bold btn border-black bg-custom-color hover:bg-black hover:text-white"><FaGooglePlusG  className=" text-red-600 text-2xl "></FaGooglePlusG>Login with google</button>
-     </div>
+      <SocialLogin></SocialLogin>
+     
 
 
 
@@ -104,10 +99,13 @@ const Login = () => {
 
      </div>
    
-     <ToastContainer/>
+
+   
+     
  
     </div>
     </div>
+
   );
 };
 
