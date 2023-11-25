@@ -1,13 +1,16 @@
-
 import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
-import { Link, } from "react-router-dom";
-
-
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const SignUp = () => {
- 
-
+  const { createUser,updateUserProfile } = useAuth();
+  const axiosPublic = useAxiosPublic();
+  const navigate =useNavigate()
   const {
     register,
     handleSubmit,
@@ -15,15 +18,51 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
 
-  
-
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    //imagebb upload to imgbb and then get an URL
+    const imageFile = { image: data.image[0] };
+    const res = await axiosPublic.post(image_hosting_api, imageFile, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+    console.log(res.data);
     console.log(data);
+    if (res.data.success) {
+      createUser(data.email, data.password).then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+      });
+      updateUserProfile(data.name,res.data.data.display_url)
+      .then(()=>{
+        const userInfo = {
+          name:data.name,
+          email:data.email,
+          badge:'bronze',
+        }
+        axiosPublic.post('/users',userInfo)
+        .then((res)=>{
+          if(res.data.insertedId){
+            console.log('user added database');
+            reset()
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Sign up has been successful",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          navigate("/")
+          }
+        })
+        .catch((error)=>console.log(error))
+      })
+      
+    }
   };
 
   return (
     <>
-      
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">
@@ -49,22 +88,6 @@ const SignUp = () => {
                 />
                 {errors.name && (
                   <span className="text-red-600">This field is required</span>
-                )}
-              </div>
-
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Photo URL</span>
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  {...register("photoURL", { required: true })}
-                  placeholder="photoURL"
-                  className="input input-bordered"
-                />
-                {errors.photoURL && (
-                  <span className="text-red-600">PhotoURL is required</span>
                 )}
               </div>
 
@@ -119,11 +142,15 @@ const SignUp = () => {
                     one special charcter
                   </span>
                 )}
-                <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
-                    Forgot password?
-                  </a>
-                </label>
+              </div>
+
+              <div className="form-control w-full my-6">
+                <input
+                  {...register("image", { required: true })}
+                  required
+                  type="file"
+                  className="file-input file-input-bordered file-input-warning w-full "
+                />
               </div>
 
               <div className="form-control mt-6">
@@ -139,7 +166,6 @@ const SignUp = () => {
                 Already have a Account<Link to="/login">Please Login</Link>
               </small>
             </p>
-        
           </div>
         </div>
       </div>

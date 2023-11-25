@@ -1,6 +1,8 @@
+import useAuth from "../../hooks/useAuth";
 
 
 const PopularTags = () => {
+  
   return (
     <div>
       <h2 className="text-center font-bold text-4xl mb-4 mt-8">Popular Tags</h2>
