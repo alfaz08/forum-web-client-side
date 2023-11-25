@@ -19,45 +19,44 @@ const SignUp = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    //imagebb upload to imgbb and then get an URL
     const imageFile = { image: data.image[0] };
     const res = await axiosPublic.post(image_hosting_api, imageFile, {
       headers: {
         "content-type": "multipart/form-data",
       },
     });
-    console.log(res.data);
-    console.log(data);
+      
     if (res.data.success) {
-      createUser(data.email, data.password).then((result) => {
+      try {
+        const result = await createUser(data.email, data.password);
         const loggedUser = result.user;
         console.log(loggedUser);
-      });
-      updateUserProfile(data.name,res.data.data.display_url)
-      .then(()=>{
+  
+        await updateUserProfile(data.name, res.data.data.display_url);
+  
         const userInfo = {
-          name:data.name,
-          email:data.email,
-          badge:'bronze',
+          name: data.name,
+          email: data.email,
+          badge: 'bronze',
+        };
+  
+        const userRes = await axiosPublic.post('/users', userInfo);
+  
+        if (userRes.data.insertedId) {
+          console.log('user added to the database');
+          reset();
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Sign up has been successful',
+            showConfirmButton: false,
+            timer: 500,
+          });
+          navigate('/');
         }
-        axiosPublic.post('/users',userInfo)
-        .then((res)=>{
-          if(res.data.insertedId){
-            console.log('user added database');
-            reset()
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "Sign up has been successful",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          navigate("/")
-          }
-        })
-        .catch((error)=>console.log(error))
-      })
-      
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 

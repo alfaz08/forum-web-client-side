@@ -63,16 +63,16 @@ const Navbar = () => {
       <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
         <div className="w-10 rounded-full">
           {
-            user ?
+            user.photoURL ?
             <img alt="Tailwind CSS Navbar component" src={user.photoURL} />
             :
-            <img alt="Tailwind CSS Navbar component" src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+            <img alt="Tailwind CSS Navbar component" src="https://i.ibb.co/37dj5GJ/blank-profile-picture-973460-960-720.jpg" />
           }
         </div>
       </label>
       <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
         <li>
-            {user.email}
+            {user.displayName}
         </li>
         <Link to='/dashboard'>
         <li><a>Dashboard</a></li>
