@@ -2,6 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaGooglePlusG } from "react-icons/fa";
 
 import { ToastContainer, toast } from 'react-toastify';
+ import 'react-toastify/dist/ReactToastify.css';
 import useAuth from "../../hooks/useAuth";
 
 
@@ -27,7 +28,6 @@ const Login = () => {
      }) 
      .catch(error=>{
       console.log(error)
-      setLoginError(error.message)
       toast.error(error.message)
       e.target.reset()
      })
