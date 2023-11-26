@@ -15,6 +15,7 @@ import SignUp from "../Pages/SignUp/SignUp";
 import MemberShip from "../Pages/MemberShip/MemberShip";
 import PrivateRoute from "./PrivateRoute";
 import Contact from "../Pages/Contact/Contact";
+import AdminRoute from "./AdminRoute";
 
 
 const router = createBrowserRouter([
@@ -69,19 +70,19 @@ const router = createBrowserRouter([
     //for admin
     {
       path: "adminHome",
-      element: <AdminHome></AdminHome>,
+      element: <AdminRoute><AdminHome></AdminHome></AdminRoute>,
     },
     {
       path: "manageUsers",
-      element: <ManageUsers></ManageUsers>,
+      element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>,
     },
     {
       path: "reportComment",
-      element: <ReportComment></ReportComment>,
+      element: <AdminRoute><ReportComment></ReportComment></AdminRoute> ,
     },
     {
       path: "announcement",
-      element: <Announcement></Announcement>,
+      element: <AdminRoute><Announcement></Announcement></AdminRoute>,
     },
    ]
   }
