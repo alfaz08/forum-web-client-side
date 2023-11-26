@@ -76,9 +76,16 @@ const Navbar = () => {
         <li>
             {user.displayName}
         </li>
-        <Link to='/dashboard'>
+       {
+        isAdmin ?
+        <Link to='/dashboard/adminHome'>
         <li><a className="hover:bg-warning">Dashboard</a></li>
         </Link>
+        :
+        <Link to='/dashboard/userHome'>
+        <li><a className="hover:bg-warning">Dashboard</a></li>
+        </Link>
+       }
         <li onClick={handleLogOut}><a className="hover:bg-warning">Logout</a></li>
       </ul>
     </div>
