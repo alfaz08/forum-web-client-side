@@ -16,6 +16,7 @@ import MemberShip from "../Pages/MemberShip/MemberShip";
 import PrivateRoute from "./PrivateRoute";
 import Contact from "../Pages/Contact/Contact";
 import AdminRoute from "./AdminRoute";
+import CardDetails from "../Components/Cards/CardDetails";
 
 
 const router = createBrowserRouter([
@@ -44,6 +45,11 @@ const router = createBrowserRouter([
       path: "/contact",
       element: <Contact></Contact>,
     },
+    {
+      path:"/post/:id",
+      element: <CardDetails></CardDetails>
+      
+    }
    ]
   },
 

@@ -1,9 +1,17 @@
 import React from 'react';
+import usePost from '../../hooks/usePost';
+import Card from './Card';
 
 const Cards = () => {
+const [posts] =usePost()
+console.log(posts);
   return (
-    <div>
-      <h2>Here is all card</h2>
+    <div className=''>
+      <div className='grid md:grid-cols-2 lg:grid-cols-3'>
+        {
+          posts?.map(post=> <Card key={post._id} post={post}></Card>)
+        }
+      </div>
     </div>
   );
 };

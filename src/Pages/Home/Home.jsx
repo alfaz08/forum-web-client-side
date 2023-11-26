@@ -19,14 +19,10 @@ const Home = () => {
       <Announcement></Announcement>
       </div>
 
-      <div>
+      <div className=" max-w-7xl mx-auto">
          {/* all card thakbe */}
          <Cards></Cards>
       </div>
-      
-       
-   
-       
      </div>
     <Footer></Footer>
     </div>

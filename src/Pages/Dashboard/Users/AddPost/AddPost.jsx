@@ -13,6 +13,7 @@ const AddPost = () => {
   const axiosPublic =useAxiosPublic()
   const axiosSecure = useAxiosSecure()
 
+  
 
   const onSubmit = async(data) => {
    
@@ -39,7 +40,7 @@ const AddPost = () => {
       }
       console.log(postItem);
       //
-      const menuRes =await axiosPublic.post('/posts',postItem)
+      const menuRes =await axiosSecure.post('/posts',postItem)
       console.log(menuRes.data);
       if(menuRes.data.insertedId){
         reset()
@@ -175,7 +176,7 @@ const AddPost = () => {
 
           </div>
 
-          {/* Recipe Details */}
+         
 
           
           <div className="form-control w-full my-6">
@@ -186,7 +187,7 @@ const AddPost = () => {
               className="file-input file-input-bordered file-input-warning w-full "
             />
           </div>
-          <button className="btn btn-warning">
+          <button className="btn btn-warning hover:text-white hover:bg-black">
             Add Post
           </button>
         </form>
