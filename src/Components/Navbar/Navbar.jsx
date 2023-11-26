@@ -2,11 +2,13 @@ import { Link, NavLink } from "react-router-dom";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
+import useAdmin from "../../hooks/useAdmin";
 
 
 const Navbar = () => {
 
   const {user,logOut} = useAuth()
+  const [isAdmin] =useAdmin()
   console.log(user);
 
   const handleLogOut =()=>{

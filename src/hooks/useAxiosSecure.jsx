@@ -10,8 +10,7 @@ const axiosSecure = axios.create({
 
 
 const useAxiosSecure = () => {
-  const navigate =useNavigate()
-  const {logOut} =useAuth()
+  
   axiosSecure.interceptors.request.use(function(config){
    const token =localStorage.getItem('access-token')
    console.log('stop',token);
@@ -22,17 +21,17 @@ const useAxiosSecure = () => {
   })
 
  //intercept
- axiosSecure.interceptors.response.use(function(response){
-  return response
- },async(error)=>{
-  const status = error.response.status
-  console.log('status interceptor',status);
-  if(status===401 || status ===403){
-    await logOut()
-    navigate('/login')
-  }
-  return Promise.reject(error)
- })
+//  axiosSecure.interceptors.response.use(function(response){
+//   return response
+//  },async(error)=>{
+//   const status = error.response.status
+//   console.log('status interceptor',status);
+//   if(status===401 || status ===403){
+//     await logOut()
+//     navigate('/login')
+//   }
+//   return Promise.reject(error)
+//  })
 
 
   return axiosSecure;

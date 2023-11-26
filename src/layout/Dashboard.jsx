@@ -6,11 +6,12 @@ import { BsPostcardFill } from "react-icons/bs";
 import { FaUsers } from "react-icons/fa6";
 import { FaCommentAlt } from "react-icons/fa";
 import { MdAddAlert } from "react-icons/md";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
    
 
-  const isAdmin =true
+  const [isAdmin] =useAdmin()
 
   return (
     <div className="flex">
