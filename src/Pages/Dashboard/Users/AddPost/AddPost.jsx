@@ -1,23 +1,72 @@
 import { useForm } from "react-hook-form";
 import useAuth from "../../../../hooks/useAuth";
+import useAxiosPublic from "../../../../hooks/useAxiosPublic";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const AddPost = () => {
   const { register, handleSubmit ,reset} = useForm();
-  const {user} =useAuth()
-  const onSubmit = async(data) => {
+  console.log('help');
+  const axiosPublic =useAxiosPublic()
+  const axiosSecure = useAxiosSecure()
 
-  }
+
+  const onSubmit = async(data) => {
+   
+
+    //image upload to imgbb and then get an url
+    const imageFile ={image: data.image[0]}
+    const res =await axiosPublic.post(image_hosting_api,imageFile,{
+      headers:{
+        'content-type': 'multipart/form-data'
+      }
+    })
+    if(res.data.success){
+      //now send the menu item data to the server with the image URL
+      const postItem ={
+        name: data.name,
+        email: data.email,
+        title: data.title,
+        description: data.description,
+        tag:data.tag,
+        upVote: parseFloat(data.upVote),
+        downVote: parseFloat(data.downVote),
+        image: res.data.data.display_url,
+        createdAt: new Date()
+      }
+      console.log(postItem);
+      //
+      const menuRes =await axiosPublic.post('/posts',postItem)
+      console.log(menuRes.data);
+      if(menuRes.data.insertedId){
+        reset()
+        //show success popup
+        Swal.fire({
+          position:"top-end",
+          icon:"success",
+          title:`${data.title} is added in the post!`,
+          showConfirmButton:false,
+          timer:1500
+        })
+
+      }
+    }
+    
+  };
 
 
 
   return (
     <div>
-      <h1 className="mt-2 text-center">Add Your Post</h1>
+      <h1 className="mt-2 text-center text-2xl font-bold">Add Your Post</h1>
       <div>
         <form onSubmit={handleSubmit(onSubmit)} className="ml-2">
           <div className="form-control w-full my-6">
             <label className="label">
-              <span className="label-text">Name</span>
+              <span className="label-text text-xl font-bold">Name</span>
             </label>
             <input
               type="text"
@@ -29,10 +78,11 @@ const AddPost = () => {
 
           <div className="form-control w-full my-6">
             <label className="label">
-              <span className="label-text">Email</span>
+              <span className="label-text text-xl font-bold">Email</span>
             </label>
             <input
               type="text"
+              
               {...register("email",{required:true})}
               required
               className="input input-bordered border-amber-400 w-full"
@@ -41,7 +91,7 @@ const AddPost = () => {
 
           <div className="form-control w-full ">
               <label className="label">
-                <span className="label-text">Post Title</span>
+                <span className="label-text text-xl font-bold">Post Title</span>
               </label>
               <input
                 type="text"
@@ -55,7 +105,7 @@ const AddPost = () => {
 
             <div className="form-control">
             <label className="label">
-              <span className="label-text">Post Description</span>
+              <span className="label-text text-xl font-bold">Post Description</span>
             </label>
             <textarea
               {...register("description")}
@@ -74,14 +124,14 @@ const AddPost = () => {
               </label>
               <select 
                 defaultValue="default"
-                {...register("category",{required:true})}
+                {...register("tag",{required:true})}
                 required
                 className="select select-bordered border-amber-400 w-full"
               >
                 <option disabled value="default" >
                   Select a Tag
                 </option>
-                <option value="technology">Technology</option>
+                <option value="technology ">Technology</option>
                 <option value="entertainment">Entertainment</option>
                 <option value="programming">Programming</option>
                 <option value="travel">Travel</option>
@@ -92,22 +142,22 @@ const AddPost = () => {
             {/* price */}
             <div className="form-control ">
               <label className="label">
-                <span className="label-text">Upvote</span>
+                <span className="label-text text-xl font-bold">Up Vote</span>
               </label>
               <input
                 type="text"
                 placeholder="upVote"
-                {...register("upVot",{required:true})}
+                {...register("upVote",{required:true})}
                 required
                 defaultValue="0"
-                disabled
+               
                 className="input input-bordered border-amber-400 w-full"
               />
             </div>
 
             <div className="form-control  ">
               <label className="label">
-                <span className="label-text">Down Vote</span>
+                <span className="label-text text-xl font-bold">Down Vote</span>
               </label>
               <input
                 type="text"
@@ -115,7 +165,7 @@ const AddPost = () => {
                 defaultValue="0"
                 {...register("downVote",{required:true})}
                 required
-                disabled
+             
                 className="input input-bordered border-amber-400 w-full"
               />
             </div>
