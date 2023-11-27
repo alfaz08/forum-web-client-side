@@ -6,6 +6,7 @@ import PopularTags from "../../Components/PopularTags/PopularTags";
 
 
 
+
 const Home = () => {
   return (
     <div >
@@ -20,6 +21,7 @@ const Home = () => {
       </div>
 
       <div className=" max-w-7xl mx-auto">
+        
          {/* all card thakbe */}
          <Cards></Cards>
       </div>

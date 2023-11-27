@@ -34,8 +34,10 @@ const CardDetails = () => {
     if (user) {
       const commentList = {
         commentDes: data.description,
+        postTitle:title,
         userEmail: user.email,
         postId: id,
+        
       };
       console.log(commentList);
   
