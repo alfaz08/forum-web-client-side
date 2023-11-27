@@ -101,7 +101,7 @@ const CardDetails = () => {
  const handleDownVote = async (id)=>{
   if (user) {
     try {
-      const response = await axiosSecure.patch(`/posts/count/${id}`);
+      const response = await axiosSecure.patch(`/posts/down/${id}`);
       // Additional logic after successful POST request, if needed
       console.log(response);
       if(response.data.modifiedCount){
