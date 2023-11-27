@@ -3,10 +3,15 @@ import usePost from "../../hooks/usePost";
 import { useForm } from "react-hook-form";
 import { FaArrowAltCircleDown, FaArrowAltCircleUp } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 const CardDetails = () => {
   const { id } = useParams();
   console.log(id);
   const {user} = useAuth()
+  const axiosSecure = useAxiosSecure()
+  const axiosPublic = useAxiosPublic()
   const navigate =useNavigate()
   console.log(user);
   const [posts] = usePost();
@@ -24,14 +29,39 @@ const CardDetails = () => {
 
   // Destructure properties from selectedPost
   const { description,createdAt, downVote, email, image, name, tag, title, upVote, _id } = selectedPost;
-
-  const onSubmit =async (data)=>{
-   user ? 
-   console.log('user')
-   :
-   navigate('/login')
-  }
- 
+  
+  const onSubmit = async (data) => {
+    if (user) {
+      const commentList = {
+        commentDes: data.description,
+        userEmail: user.email,
+        postId: id,
+      };
+      console.log(commentList);
+  
+      try {
+        const response =await axiosSecure.post('/comments', commentList);
+        // Additional logic after successful POST request, if needed
+        if(response.data.insertedId){
+          reset()
+          //show success popup
+          Swal.fire({
+            position:"top-end",
+            icon:"success",
+            title:"comment is added to the post",
+            showConfirmButton:false,
+            timer:1500
+          })
+  
+        }
+      } catch (error) {
+        console.error('Error posting comment:', error);
+      }
+    } 
+    else {
+      navigate('/login');
+    }
+  };
  const handleUpVote = (id)=>{
   user ? 
    console.log('user')
