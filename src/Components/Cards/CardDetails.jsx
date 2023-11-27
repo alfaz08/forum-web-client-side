@@ -61,12 +61,12 @@ const CardDetails = () => {
  
    <h2 className="font-bold text-xl mt-4 ">Tag: {tag}</h2>
 
-   <h2 className="font-bold text-xl mt-4">Total Marks:{downVote}</h2>
+  
    
    <h2 className="font-bold text-xl mt-4">Post Time: {createdAt}</h2>
  
  
-   <div className="flex gap-2 ">
+   <div className="flex gap-2 mt-4">
     <h2 className="mt-2 font-bold">Give your reaction on this  post: </h2>
     
     <button onClick={()=>handleUpVote(_id)} className="btn btn-warning hover:bg-teal-300">
@@ -83,7 +83,7 @@ const CardDetails = () => {
 
    <div className="bg-teal-300 flex justify-between items-center sm:w-[200px] md:w-[400px] h-[100px] rounded-lg mt-4">
     <div>
-      <h2 className="ml-2 font-bold">Discuss your opinion <br />in our forum</h2>
+      <h2 className="ml-2 font-bold">Discuss your opinion <br />in our website</h2>
     </div>
     <div>
     <h2 className="mr-2 font-bold">Let's Give Your Comment</h2>

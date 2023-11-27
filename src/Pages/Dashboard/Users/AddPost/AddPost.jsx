@@ -36,7 +36,9 @@ const AddPost = () => {
         upVote: parseFloat(data.upVote),
         downVote: parseFloat(data.downVote),
         image: res.data.data.display_url,
-        createdAt: new Date()
+        createdAt: new Date(),
+        commentCount:0,
+        voteCount:0
       }
       console.log(postItem);
       //

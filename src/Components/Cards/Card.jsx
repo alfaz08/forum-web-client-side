@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 
 const Card = ({post}) => {
-  const {_id,createdAt,downVote,upVote,email,tag,name,image,title} =post
+  const {_id,createdAt,commentCount,voteCount,downVote,upVote,email,tag,name,image,title} =post
   return (
     <div>
       <div className="card w-80 bg-base-100 shadow-xl mt-4">
@@ -14,8 +14,8 @@ const Card = ({post}) => {
     <h2 className="">Post Title: {title}</h2>
     <h2 className="">Tags: {tag}</h2>
     
-    <h2 className="">Total Comment</h2>
-    <h2 className="">Total Vote</h2>
+    <h2 className="">Total Comment: {commentCount}</h2>
+    <h2 className="">Total Vote: {voteCount}</h2>
     <h2 className="">Post time: {createdAt}</h2>
     <div className="card-actions justify-center">
       <Link  to={`/post/${_id}`}>
