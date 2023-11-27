@@ -67,17 +67,62 @@ const CardDetails = () => {
       navigate('/login');
     }
   };
- const handleUpVote = (id)=>{
-  user ? 
-   console.log('user')
-   :
-   navigate('/login')
+
+
+
+ const handleUpVote = async (id)=>{
+  console.log(id);
+  if (user) {
+    try {
+      const response = await axiosSecure.patch(`/posts/count/${id}`);
+      // Additional logic after successful POST request, if needed
+      console.log(response);
+      if(response.data.modifiedCount){
+        reset()
+        //show success popup
+        Swal.fire({
+          position:"top-end",
+          icon:"success",
+          title:"You liked the post",
+          showConfirmButton:false,
+          timer:1500
+        })
+        
+      }
+    } catch (error) {
+      console.error('Error posting comment:', error);
+    }
+  } 
+  else {
+    navigate('/login');
+  }
  }
- const handleDownVote = (id)=>{
-  user ? 
-   console.log('user')
-   :
-   navigate('/login')
+ 
+ const handleDownVote = async (id)=>{
+  if (user) {
+    try {
+      const response = await axiosSecure.patch(`/posts/count/${id}`);
+      // Additional logic after successful POST request, if needed
+      console.log(response);
+      if(response.data.modifiedCount){
+        reset()
+        //show success popup
+        Swal.fire({
+          position:"top-end",
+          icon:"success",
+          title:"You disliked the post",
+          showConfirmButton:false,
+          timer:1500
+        })
+        
+      }
+    } catch (error) {
+      console.error('Error posting comment:', error);
+    }
+  } 
+  else {
+    navigate('/login');
+  }
  }
 
 
@@ -104,12 +149,12 @@ const CardDetails = () => {
    <div className="flex gap-2 mt-4">
     <h2 className="mt-2 font-bold">Give your reaction on this  post: </h2>
     
-    <button onClick={()=>handleUpVote(_id)} className="btn btn-warning hover:bg-teal-300">
+    <button onClick={()=>handleUpVote(id)} className="btn btn-warning hover:bg-teal-300">
 
    <FaArrowAltCircleUp className="text-2xl "/>
    </button>
 
-   <button onClick={()=>handleDownVote(_id)} className="btn ml-4 btn-warning hover:bg-teal-300">
+   <button onClick={()=>handleDownVote(id)} className="btn ml-4 btn-warning hover:bg-teal-300">
    <FaArrowAltCircleDown className=" text-2xl  " />
    </button>
   </div>
