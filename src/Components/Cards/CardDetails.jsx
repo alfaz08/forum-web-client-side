@@ -28,7 +28,7 @@ const CardDetails = () => {
   }
 
   // Destructure properties from selectedPost
-  const { description,createdAt, downVote, email, image, name, tag, title, upVote, _id } = selectedPost;
+  const { description,createdAt,commentCount, downVote, email, image, name, tag, title, upVote, _id } = selectedPost;
   
   const onSubmit = async (data) => {
     if (user) {
@@ -39,6 +39,9 @@ const CardDetails = () => {
       };
       console.log(commentList);
   
+
+  
+
       try {
         const response =await axiosSecure.post('/comments', commentList);
         // Additional logic after successful POST request, if needed
@@ -52,7 +55,9 @@ const CardDetails = () => {
             showConfirmButton:false,
             timer:1500
           })
-  
+           //comment count
+          const postResponse = await axiosSecure.patch(`/posts/${id}`);
+           console.log(postResponse.data);
         }
       } catch (error) {
         console.error('Error posting comment:', error);
