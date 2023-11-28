@@ -7,6 +7,8 @@ import { FaUsers } from "react-icons/fa6";
 import { FaCommentAlt } from "react-icons/fa";
 import { MdAddAlert } from "react-icons/md";
 import useAdmin from "../hooks/useAdmin";
+import { FaHouseUser } from "react-icons/fa";
+
 
 const Dashboard = () => {
    
@@ -14,7 +16,7 @@ const Dashboard = () => {
   const [isAdmin] =useAdmin()
 
   return (
-    <div className="flex">
+    <div className="flex container mx-auto">
       {/* dashboard side bar */}
       <div className="w-64 min-h-screen bg-teal-400">
 
@@ -27,7 +29,7 @@ const Dashboard = () => {
             <>
              <li>
               <NavLink to="/dashboard/adminHome">
-              <ImProfile />
+              <FaHouseUser />
                 Admin Profile
                 </NavLink>
             </li>
@@ -55,7 +57,7 @@ const Dashboard = () => {
             <>
              <li>
               <NavLink to="/dashboard/userHome">
-              <ImProfile />
+              <FaHouseUser />
                 User Profile
                 </NavLink>
             </li>
