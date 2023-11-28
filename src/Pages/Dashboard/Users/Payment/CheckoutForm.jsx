@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import useAuth from '../../../../hooks/useAuth';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 
 const CheckoutForm = () => {
@@ -10,6 +11,7 @@ const CheckoutForm = () => {
   const [clientSecret,setClientSecret] =useState('')
   const [transactionId,setTransactionId]=useState('')
   const stripe =useStripe()
+  const navigate =useNavigate()
   const {user} =useAuth()
   const axiosSecure =useAxiosSecure()
   const totalPrice = 1000
@@ -67,7 +69,7 @@ const CheckoutForm = () => {
       Swal.fire({
         position:"top-end",
         icon:"success",
-        title:`${transactionId} Payment is successful`,
+        title:`Payment is successful and Now you are Gold Member`,
         showConfirmButton:false,
         timer:1500
       })
@@ -87,9 +89,11 @@ const CheckoutForm = () => {
     };
   
     const patchRes = await axiosSecure.patch(`/users/email/${user?.email}`, patchData);
-    console.log('Patch operation result', patchRes.data);
+    if(patchRes.data.modifiedCount){
+      navigate('/')
+    }
 
-
+   
 
 
   }

@@ -1,7 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import useUserInfo from '../../hooks/useUserInfo';
 
 const MemberShip = () => {
+
+  const normalizedUserInfo =useUserInfo()
+  console.log(normalizedUserInfo);
+  
   return (
     <div className=" max-w-7xl mx-auto">
 
@@ -40,9 +45,16 @@ const MemberShip = () => {
       One Time Payment
     </h2>
     <div className="card-actions justify-center">
+      {
+        normalizedUserInfo?.badge==='gold' ?
+        
+      <button disabled className='btn btn-warning hover:text-white hover:bg-black' >Buy Now</button>
+      
+      :
       <Link to='/payment'>
       <button className='btn btn-warning hover:text-white hover:bg-black' >Buy Now</button>
       </Link>
+      }
 
     </div>
   </div>
