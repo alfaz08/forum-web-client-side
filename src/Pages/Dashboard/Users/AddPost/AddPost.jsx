@@ -13,7 +13,7 @@ const AddPost = () => {
   const axiosPublic =useAxiosPublic()
   const axiosSecure = useAxiosSecure()
 
-  
+  const {user} =useAuth()
 
   const onSubmit = async(data) => {
    
@@ -73,6 +73,7 @@ const AddPost = () => {
             </label>
             <input
               type="text"
+              
               {...register("name",{required:true})}
               required
               className="input input-bordered border-amber-400 w-full"

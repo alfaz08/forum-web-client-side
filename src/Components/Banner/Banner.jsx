@@ -1,6 +1,11 @@
 import { FaSearchPlus } from "react-icons/fa";
+import usePost from "../../hooks/usePost";
 
 const Banner = () => {
+
+  const [posts] =usePost()
+  
+  console.log(posts);
   return (
     <div>
       <div className="hero h-72 md:h-[450px] border border-teal-100" style={{backgroundImage: 'url(https://i.ibb.co/zx1hVXY/ezgif-com-webp-to-jpg.jpg)'}}>
@@ -17,3 +22,4 @@ const Banner = () => {
 };
 
 export default Banner;
+

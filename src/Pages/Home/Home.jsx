@@ -6,7 +6,6 @@ import PopularTags from "../../Components/PopularTags/PopularTags";
 
 
 
-
 const Home = () => {
   return (
     <div >
@@ -19,7 +18,6 @@ const Home = () => {
       {/* akhane condition use kore announcement dekhabo */}
       <Announcement></Announcement>
       </div>
-
       <div className=" max-w-7xl mx-auto">
         
          {/* all card thakbe */}

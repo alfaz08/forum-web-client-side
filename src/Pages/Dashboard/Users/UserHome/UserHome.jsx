@@ -1,9 +1,25 @@
 
+import useSingle from "../../../../hooks/useSingle";
+import useSinglePost from "../../../../hooks/useSinglePost";
+import UserHomeDesign from "./UserHomeDesign";
+
+
 
 const UserHome = () => {
+
+  
+  const [single] =useSingle()
+ 
+  
+
   return (
     <div>
-      <h2>UserHome</h2>
+      
+      {
+        single.map(item =><UserHomeDesign key={item._id} item={item}></UserHomeDesign> )
+      }
+     
+
     </div>
   );
 };
