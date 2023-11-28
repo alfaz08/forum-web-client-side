@@ -17,6 +17,7 @@ import PrivateRoute from "./PrivateRoute";
 import Contact from "../Pages/Contact/Contact";
 import AdminRoute from "./AdminRoute";
 import CardDetails from "../Components/Cards/CardDetails";
+import CommentDetails from "../Pages/Dashboard/Users/MyPost/CommentDetails";
 
 
 const router = createBrowserRouter([
@@ -70,6 +71,11 @@ const router = createBrowserRouter([
     {
       path: "myPost",
       element: <MyPost></MyPost>,
+    },
+    {
+      path:"myPost/comments/:id",
+      element: <CommentDetails></CommentDetails>
+      
     },
 
 

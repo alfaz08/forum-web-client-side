@@ -3,6 +3,7 @@ import useMyPost from "../../../../hooks/useMyPost";
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import { FaCommentDots } from "react-icons/fa6";
 
 const MyPost = () => {
   const [myPost,refetch] = useMyPost()
@@ -49,8 +50,8 @@ const handleDelete =(id)=>{
     <th>#</th>
       <td>Title</td>
       <td>Number of Votes</td>
-      <td>Make Admin</td>
-      <td>Subscription Status</td>
+      <td>All Comment</td>
+      <td>Delete Post</td>
     </tr>
   </thead>
   <tbody>
@@ -63,8 +64,9 @@ const handleDelete =(id)=>{
       <td>{post.title}</td>
       <td>{post.voteCount}</td>
       <td>
-       <Link >
-       <button className="btn btn-warning">All Comment: </button>
+       <Link to={`comments/${post._id}`}>
+       <button className="btn btn-warning"><FaCommentDots />
+       </button>
        </Link>
       </td>
       <td>
