@@ -71,10 +71,28 @@ const CheckoutForm = () => {
         showConfirmButton:false,
         timer:1500
       })
+      //now save the payment in database
+      const payment ={
+        email: user?.email,
+        price:totalPrice,
+        transactionId: paymentIntent.id
+      }
+      console.log(payment);
+      const res = await axiosSecure.post('/payments',payment)
+      console.log('payment done',res.data);
     }
+   
+    const patchData = {
+      badge: 'gold',
+    };
+  
+    const patchRes = await axiosSecure.patch(`/users/email/${user?.email}`, patchData);
+    console.log('Patch operation result', patchRes.data);
+
+
+
+
   }
-
-
   }
 
 
