@@ -18,6 +18,7 @@ import Contact from "../Pages/Contact/Contact";
 import AdminRoute from "./AdminRoute";
 import CardDetails from "../Components/Cards/CardDetails";
 import CommentDetails from "../Pages/Dashboard/Users/MyPost/CommentDetails";
+import Payment from "../Pages/Dashboard/Users/Payment/Payment";
 
 
 const router = createBrowserRouter([
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
     {
       path: "/membership",
       element: <PrivateRoute><MemberShip></MemberShip></PrivateRoute>,
+    },
+    {
+      path: "/payment",
+      element: <PrivateRoute> <Payment></Payment> </PrivateRoute>,
     },
     {
       path: "/contact",
@@ -75,8 +80,8 @@ const router = createBrowserRouter([
     {
       path:"myPost/comments/:id",
       element: <CommentDetails></CommentDetails>
-      
     },
+    
 
 
     //for admin

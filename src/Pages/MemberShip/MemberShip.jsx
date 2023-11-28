@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const MemberShip = () => {
   return (
@@ -12,7 +13,7 @@ const MemberShip = () => {
 
       <div className='grid grid-cols-1 md:flex justify-center gap-6 mt-6'>
         <div >
-        <div className="card w-96 h-96  bg-teal-200 shadow-lg">
+        <div className="card w-96 h-96  bg-teal-200 shadow-2xl">
      <h2 className='font-bold text-xl mt-2 text-center'>Bronze Member</h2>
   <div className="card-body">
     <h2 className=" text-center font-bold text-4xl p-20">
@@ -29,7 +30,7 @@ const MemberShip = () => {
         </div>
 
         <div >
-        <div className="card w-96 h-96  bg-teal-200 shadow-lg">
+        <div className="card w-96 h-96  bg-teal-200 shadow-2xl">
      <h2 className='font-bold text-xl mt-2 text-center'>Gold Member</h2>
   <div className="card-body">
     <h2 className=" text-center font-bold text-4xl p-20">
@@ -39,7 +40,10 @@ const MemberShip = () => {
       One Time Payment
     </h2>
     <div className="card-actions justify-center">
+      <Link to='/payment'>
       <button className='btn btn-warning hover:text-white hover:bg-black' >Buy Now</button>
+      </Link>
+
     </div>
   </div>
 </div>
