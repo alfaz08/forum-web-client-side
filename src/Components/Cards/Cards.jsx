@@ -12,7 +12,7 @@ const Cards = () => {
           </div>
           <div>
             <button className="btn btn-warning hover:text-white hover:bg-black" onClick={toggleSortByPopularity}>
-              Click here
+              sort
             </button>
           </div>
         </div>

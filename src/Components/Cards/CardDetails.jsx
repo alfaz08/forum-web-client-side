@@ -6,17 +6,41 @@ import { AiFillLike, AiFillDislike } from "react-icons/ai";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import useComment from "../../hooks/useComment";
+import useSingleComment from "../../hooks/useSingleComment";
+import { useQuery } from "@tanstack/react-query";
 
 const CardDetails = () => {
   const { id } = useParams();
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
+  
   const navigate = useNavigate();
   const [posts] = usePost();
   const { register, handleSubmit, reset } = useForm();
 
+  const { data: comment = [] } = useQuery({
+    queryKey: ['comment', id],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/comments/post?postId=${id}`);
+      return res.data;
+    },
+  });
+
+  console.log(comment);
+
+
+
+
+
+
+
   const selectedPost = posts.find((post) => post?._id === id);
+
+  
+  
+
 
   if (!selectedPost) {
     return (
@@ -172,6 +196,7 @@ const CardDetails = () => {
             </div>
           </form>
         </div>
+        <p></p>
       </div>
     </div>
   );
