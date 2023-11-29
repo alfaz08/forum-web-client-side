@@ -3,10 +3,12 @@ import { MdOutlineNotificationsActive } from "react-icons/md";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
 import useAdmin from "../../hooks/useAdmin";
+import useAnnounce from "../../hooks/useAnnounce";
+import { HiMiniBellAlert } from "react-icons/hi2";
 
 
 const Navbar = () => {
-
+  const [announcement] =useAnnounce()
   const {user,logOut} = useAuth()
   const [isAdmin] =useAdmin()
   console.log(user);
@@ -25,9 +27,10 @@ const Navbar = () => {
     <>
       <li className="text-xl"><NavLink to="/">Home</NavLink></li>
       <li className="text-xl"><NavLink to="/membership">Membership</NavLink></li>
-      <li >
-        <div >
-          <MdOutlineNotificationsActive className="mr-2 text-4xl" />
+      <li className="bg-teal-200 rounded-lg">
+        <div className="bg-teal-300">
+          <HiMiniBellAlert className=" text-4xl" />
+          <div className="badge bg-teal-300 font-bold">+{announcement.length}</div>
         </div>
       </li>
       <li className="text-xl"><NavLink to="/contact" >Contact</NavLink></li>

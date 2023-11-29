@@ -1,7 +1,10 @@
 import SectionTitle from "../../../../Components/SectionTitle/SectionTitle";
+import useReported from "../../../../hooks/useReported";
 
 
 const ReportComment = () => {
+  const [reported] =useReported()
+  console.log(reported);
   return (
     <div>
        <SectionTitle
