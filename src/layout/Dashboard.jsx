@@ -8,6 +8,8 @@ import { FaCommentAlt } from "react-icons/fa";
 import { MdAddAlert } from "react-icons/md";
 import useAdmin from "../hooks/useAdmin";
 import { FaHouseUser } from "react-icons/fa";
+import { FaTags } from "react-icons/fa";
+
 
 
 const Dashboard = () => {
@@ -50,6 +52,12 @@ const Dashboard = () => {
               <NavLink to="/dashboard/announcement">
               <MdAddAlert />
                 Announcement
+                </NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard/addTag">
+              <FaTags />
+                Add Tag
                 </NavLink>
             </li>
             </>

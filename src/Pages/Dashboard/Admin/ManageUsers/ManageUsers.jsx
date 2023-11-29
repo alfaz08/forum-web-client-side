@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { FaUsers } from "react-icons/fa6";
 import Swal from "sweetalert2";
+import SectionTitle from "../../../../Components/SectionTitle/SectionTitle";
 
 
 const ManageUsers = () => {
@@ -37,6 +38,10 @@ const ManageUsers = () => {
 
   return (
     <div>
+      <SectionTitle
+        heading="All Users"
+        subHeading="Manage Your Own Way"
+      ></SectionTitle>
       <div className="flex justify-evenly my-4">
       <h2>AllUsers</h2>
       <h2>Total Users: {users.length}</h2>

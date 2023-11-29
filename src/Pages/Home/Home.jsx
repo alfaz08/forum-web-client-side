@@ -1,4 +1,4 @@
-import Announcement from "../../Components/Announcement/Anouncement";
+import Announcement from "../Dashboard/Admin/Announcement/Anouncement";
 import Banner from "../../Components/Banner/Banner";
 import Cards from "../../Components/Cards/Cards";
 import Footer from "../../Components/Footer/Footer";

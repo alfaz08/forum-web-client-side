@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import useUserInfo from "../../../../hooks/useUserInfo";
 import useMyPost from "../../../../hooks/useMyPost";
 import { Link } from "react-router-dom";
+import SectionTitle from "../../../../Components/SectionTitle/SectionTitle";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -75,7 +76,10 @@ const AddPost = () => {
 
   return (
     <div>
-      <h1 className="mt-2 text-center text-2xl font-bold">Add Your Post</h1>
+       <SectionTitle
+        heading="Add a post"
+        subHeading="What's new?"
+      ></SectionTitle>
       <div>
        
      {

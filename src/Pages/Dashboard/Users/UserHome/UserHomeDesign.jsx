@@ -4,6 +4,7 @@ import { MdOutlineMail } from "react-icons/md";
 
 import { FaAddressCard } from "react-icons/fa6";
 import { MdCardMembership } from "react-icons/md";
+import SectionTitle from "../../../../Components/SectionTitle/SectionTitle";
 
 const UserHomeDesign = ({item,post}) => {
 
@@ -16,9 +17,10 @@ console.log(singlePost);
 const {user} = useAuth()
   return (
     <div>
-      <h2 className="mt-4 font-bold text-center text-4xl">
-        Welcome to Profile
-      </h2>
+       <SectionTitle
+        heading="Profile"
+        subHeading="Welcome to Your"
+      ></SectionTitle>
      
 
 
@@ -44,7 +46,7 @@ Membership Status: {badge}</h2>
           )
       } */}
 
- <h2 className="font-bold text-4xl grid justify-center">Recent Post</h2>
+ <h2 className="font-bold text-4xl grid justify-center  text-amber-400">Recent Post</h2>
 <div className="overflow-x-auto">
 <table className="table table-zebra">
   {/* head */}

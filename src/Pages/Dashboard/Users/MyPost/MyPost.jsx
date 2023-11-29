@@ -4,6 +4,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { FaCommentDots } from "react-icons/fa6";
+import SectionTitle from "../../../../Components/SectionTitle/SectionTitle";
 
 const MyPost = () => {
   const [myPost,refetch] = useMyPost()
@@ -39,7 +40,10 @@ const handleDelete =(id)=>{
   return (
     <div>
     <div className="flex justify-evenly my-4">
-    <h2>MyPost: {myPost.length}</h2>
+    <SectionTitle
+        heading="My Post"
+        subHeading="See What comment others?"
+      ></SectionTitle>
     
     </div>
     <div className="overflow-x-auto">

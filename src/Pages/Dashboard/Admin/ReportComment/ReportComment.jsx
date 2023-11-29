@@ -1,9 +1,13 @@
+import SectionTitle from "../../../../Components/SectionTitle/SectionTitle";
 
 
 const ReportComment = () => {
   return (
     <div>
-      <h2>Report</h2>
+       <SectionTitle
+        heading="Reported Comments"
+        subHeading="Take some actions"
+      ></SectionTitle>
     </div>
   );
 };

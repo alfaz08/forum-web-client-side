@@ -7,7 +7,7 @@ import UserHome from "../Pages/Dashboard/Users/UserHome/UserHome";
 import AdminHome from "../Pages/Dashboard/Admin/AdminHome/AdminHome";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import ReportComment from "../Pages/Dashboard/Admin/ReportComment/ReportComment";
-import Announcement from "../Components/Announcement/Anouncement";
+import Announcement from "../Pages/Dashboard/Admin/Announcement/Anouncement";
 import AddPost from "../Pages/Dashboard/Users/AddPost/AddPost";
 import MyPost from "../Pages/Dashboard/Users/MyPost/MyPost";
 import Login from "../Pages/Login/Login";
@@ -19,6 +19,7 @@ import AdminRoute from "./AdminRoute";
 import CardDetails from "../Components/Cards/CardDetails";
 import CommentDetails from "../Pages/Dashboard/Users/MyPost/CommentDetails";
 import Payment from "../Pages/Dashboard/Users/Payment/Payment";
+import AddTag from "../Pages/Dashboard/Admin/Tag/AddTag";
 
 
 const router = createBrowserRouter([
@@ -67,19 +68,19 @@ const router = createBrowserRouter([
     //for users
     {
       path: "userHome",
-      element: <UserHome></UserHome>,
+      element: <PrivateRoute><UserHome></UserHome></PrivateRoute>,
     },
     {
       path: "addPost",
-      element: <AddPost></AddPost>,
+      element: <PrivateRoute><AddPost></AddPost></PrivateRoute>,
     },
     {
       path: "myPost",
-      element: <MyPost></MyPost>,
+      element: <PrivateRoute><MyPost></MyPost></PrivateRoute>,
     },
     {
       path:"myPost/comments/:id",
-      element: <CommentDetails></CommentDetails>
+      element: <PrivateRoute><CommentDetails></CommentDetails></PrivateRoute>
     },
     
 
@@ -100,6 +101,10 @@ const router = createBrowserRouter([
     {
       path: "announcement",
       element: <AdminRoute><Announcement></Announcement></AdminRoute>,
+    },
+    {
+      path: "addTag",
+      element: <AdminRoute> <AddTag></AddTag> </AdminRoute>,
     },
    ]
   }
