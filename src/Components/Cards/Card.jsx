@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import { AiFillLike, AiFillDislike } from "react-icons/ai";
 const Card = ({ post }) => {
   const { _id, createdAt, commentCount, voteCount, downVote, upVote, email, tag, name, image, title } = post;
 
@@ -25,6 +25,16 @@ const Card = ({ post }) => {
           <h2 className="">Tags: {tag}</h2>
           <h2 className="">Total Comment: {commentCount}</h2>
           <h2 className="">Total Vote: {voteCount}</h2>
+          <div className="flex items-center">
+  <div className="flex items-center mr-4">
+    <AiFillLike className="text-2xl" />
+    <h2 className="ml-2">{upVote}</h2>
+  </div>
+  <div className="flex items-center">
+    <AiFillDislike className="text-2xl" />
+    <h2 className="ml-2">{downVote}</h2>
+  </div>
+</div>
           <h2 className="">Post time: {formattedDate}</h2>
           <div className="card-actions justify-center">
             <Link to={`/post/${_id}`}>

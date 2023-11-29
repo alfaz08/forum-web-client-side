@@ -40,8 +40,8 @@ const AddPost = () => {
     if(res.data.success){
       //now send the menu item data to the server with the image URL
       const postItem ={
-        name: data.name,
-        email: data.email,
+        name: user?.displayName,
+        email: user?.email,
         title: data.title,
         description: data.description,
         tag:data.tag,

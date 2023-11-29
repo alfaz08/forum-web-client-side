@@ -77,7 +77,7 @@ const CardDetails = () => {
 
         if (response.data.insertedId) {
           reset();
-
+          
           Swal.fire({
             position: "top-end",
             icon: "success",
@@ -196,7 +196,21 @@ const CardDetails = () => {
             </div>
           </form>
         </div>
-        <p></p>
+        
+      </div>
+      <div>
+        <h2 className="font-bold">Recent Comment</h2>
+        {
+          comment.map(item=> <div className="font-bold text-xl mb-4" key={item._id}>
+           <p>{ item.commentDes}</p>
+           <h2>from ({item.userEmail})</h2>
+          </div>
+           
+           
+        
+         
+          )
+        }
       </div>
     </div>
   );
