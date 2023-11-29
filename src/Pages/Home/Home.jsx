@@ -3,6 +3,7 @@ import Banner from "../../Components/Banner/Banner";
 import Cards from "../../Components/Cards/Cards";
 import Footer from "../../Components/Footer/Footer";
 import PopularTags from "../../Components/PopularTags/PopularTags";
+import AnnounceDetails from "../../Components/AnnounceDetails/AnnounceDetails";
 
 
 
@@ -16,7 +17,7 @@ const Home = () => {
       </div>
       <div>
       {/* akhane condition use kore announcement dekhabo */}
-      <Announcement></Announcement>
+      <AnnounceDetails></AnnounceDetails>
       </div>
       <div className=" max-w-7xl mx-auto">
         
