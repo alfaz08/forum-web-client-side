@@ -15,16 +15,16 @@ const Card = ({ post }) => {
 
   return (
     <div>
-      <div className="card w-80 bg-base-100 shadow-xl mt-4">
+      <div className="card  w-96 h-[500px] bg-teal-100 shadow-xl mt-4">
         <figure className="px-10 pt-10">
           <img src={image} alt="Shoes" className="rounded-xl w-48 h-32" />
         </figure>
         <div className="card-body">
-          <h2 className="">Author Name: {name}</h2>
-          <h2 className="">Post Title: {title}</h2>
-          <h2 className="">Tags: {tag}</h2>
-          <h2 className="">Total Comment: {commentCount}</h2>
-          <h2 className="">Total Vote: {voteCount}</h2>
+          <h2 className="font-bold">Author Name: {name}</h2>
+          <h2 className="font-bold">Post Title: {title}</h2>
+          <h2 className="font-bold">Tags: {tag}</h2>
+          <h2 className="font-bold">Total Comment: {commentCount}</h2>
+          <h2 className="font-bold">Total Vote: {voteCount}</h2>
           <div className="flex items-center">
   <div className="flex items-center mr-4">
     <AiFillLike className="text-2xl" />

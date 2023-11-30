@@ -1,62 +1,51 @@
-import React, { useState, useEffect } from 'react';
-import usePost from '../../hooks/usePost';
-import Card from './Card';
+import { useState } from "react";
+import usePost from "../../hooks/usePost";
+import Card from "./Card";
 
 const Cards = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [sortByPopularity, setSortByPopularity] = useState(false);
-  const [posts, loading, refetch] = usePost(currentPage, sortByPopularity);
+  const postsPerPage = 5;
 
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
+  const [posts, loading, toggleSortByPopularity] = usePost();
+
+  // Calculate the index range for the current page
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  // Change page
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
-
-  const handleSortToggle = () => {
-    setSortByPopularity((prev) => !prev);
-  };
-
-  useEffect(() => {
-    refetch();
-  }, [sortByPopularity, refetch]);
 
   return (
-    <div className="">
+    <div className=''>
       <div>
-        <div className="flex justify-center gap-4">
-          <div className="mt-2">
-            <h2 className="font-bold text-xl">Want to see the post based on popularity</h2>
-          </div>
+        <div className="flex justify-end gap-4">
+          
           <div>
-            <button
-              className="btn btn-warning hover:text-white hover:bg-black"
-              onClick={handleSortToggle}
-            >
-              Sort
+            <button className="btn mr-12 btn-warning hover:text-white hover:bg-black" onClick={toggleSortByPopularity}>
+              Sort By Popularity
             </button>
           </div>
         </div>
       </div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3">
-        {posts.map((post) => (
+      <div className='grid md:grid-cols-2 lg:grid-cols-3'>
+        {currentPosts.map((post) => (
           <Card key={post._id} post={post} />
         ))}
       </div>
       <div className="flex justify-center mt-4">
-        <button
-          className="btn btn-primary mr-2"
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </button>
-        <span className="text-xl font-bold">{currentPage}</span>
-        <button
-          className="btn btn-primary ml-2"
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={posts.length < 5}
-        >
-          Next
-        </button>
+        {/* Render pagination buttons */}
+        {Array.from({ length: Math.ceil(posts.length / postsPerPage) }, (_, index) => (
+          <button
+            key={index + 1}
+            className={`btn mx-1 ${currentPage === index + 1 ? 'btn-primary' : 'btn-secondary'}`}
+            onClick={() => handlePageChange(index + 1)}
+          >
+            {index + 1}
+          </button>
+        ))}
       </div>
     </div>
   );

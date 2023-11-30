@@ -72,8 +72,17 @@ Membership Status: {badge}</h2>
       {post.voteCount}
       </td>
       <td>
-      {post.createdAt}
-      </td>
+      {post.createdAt && (
+        new Intl.DateTimeFormat('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+          hour12: true,
+        }).format(new Date(post.createdAt))
+      )}
+    </td>
     </tr>
       )
   }

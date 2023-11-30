@@ -2,11 +2,42 @@ import { MdPendingActions } from "react-icons/md";
 
 import SectionTitle from "../../../../Components/SectionTitle/SectionTitle";
 import useReported from "../../../../hooks/useReported";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 
 const ReportComment = () => {
-  const [reported] =useReported()
+  const [reported,refetch] =useReported()
   console.log('reported',reported);
+  const axiosSecure =useAxiosSecure()
+
+  const handleDelete =(id)=>{
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result)=>{
+      if(result.isConfirmed){
+        axiosSecure.delete(`/reports/${id}`)
+        .then(res=>{
+          if(res.data.deletedCount>0){
+            refetch()
+            Swal.fire({
+              title:"Deleted",
+              text:"Comment has been deleted",
+              icon:"success"
+            })
+          }
+        })
+      }
+    })
+  } 
+
+
   return (
     <div>
        <SectionTitle
@@ -39,7 +70,7 @@ const ReportComment = () => {
         <td>{user.feedback}</td>
         <td>
         <button 
-          
+          onClick={()=>handleDelete(user._id)}
           className="btn btn-lg bg-amber-500  hover:text-white hover:bg-black">
           <MdPendingActions className="text-white text-2xl"></MdPendingActions>
 

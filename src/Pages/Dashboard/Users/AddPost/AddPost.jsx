@@ -172,7 +172,7 @@ const AddPost = () => {
             <option value="entertainment">Entertainment</option>
             <option value="programming">Programming</option>
             <option value="travel">Travel</option>
-            <option value="Health">Health</option>
+            <option value="health">Health</option>
           </select>
         </div>
 

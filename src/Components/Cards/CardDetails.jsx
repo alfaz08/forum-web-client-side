@@ -1,26 +1,28 @@
-import { useNavigate, useParams } from "react-router-dom";
-import usePost from "../../hooks/usePost";
-import { useForm } from "react-hook-form";
-import useAuth from "../../hooks/useAuth";
-import { AiFillLike, AiFillDislike } from "react-icons/ai";
-import Swal from "sweetalert2";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
-import useComment from "../../hooks/useComment";
-import useSingleComment from "../../hooks/useSingleComment";
-import { useQuery } from "@tanstack/react-query";
+import React from 'react';
+import { AiFillLike, AiFillDislike } from 'react-icons/ai';
+import { MdOutlineCardMembership } from 'react-icons/md';
+import { FaFacebook } from 'react-icons/fa';
+import Swal from 'sweetalert2';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { useQuery } from '@tanstack/react-query';
+import useAuth from '../../hooks/useAuth';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
+import usePost from '../../hooks/usePost';
+import useComment from '../../hooks/useComment';
+import { FacebookShareButton } from 'react-share';
 
 const CardDetails = () => {
   const { id } = useParams();
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
-  
   const navigate = useNavigate();
   const [posts] = usePost();
   const { register, handleSubmit, reset } = useForm();
 
-  const { data: comment = [] } = useQuery({
+  const { data: comment = [],refetch } = useQuery({
     queryKey: ['comment', id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/comments/post?postId=${id}`);
@@ -28,19 +30,7 @@ const CardDetails = () => {
     },
   });
 
-  console.log(comment);
-
-
-
-
-
-
-
   const selectedPost = posts.find((post) => post?._id === id);
-
-  
-  
-
 
   if (!selectedPost) {
     return (
@@ -53,15 +43,17 @@ const CardDetails = () => {
 
   const { description, createdAt, commentCount, downVote, email, image, name, tag, title, upVote, _id } = selectedPost;
 
-  // Format the createdAt time
-  const formattedDate = new Intl.DateTimeFormat("en-US", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    hour: "numeric",
-    minute: "numeric",
+  const formattedDate = new Intl.DateTimeFormat('en-US', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
     hour12: true,
   }).format(new Date(createdAt));
+
+  const postUrl = `${window.location.origin}/posts/${id}`;
+
 
   const onSubmit = async (data) => {
     if (user) {
@@ -73,15 +65,15 @@ const CardDetails = () => {
       };
 
       try {
-        const response = await axiosSecure.post("/comments", commentList);
+        const response = await axiosSecure.post('/comments', commentList);
 
         if (response.data.insertedId) {
           reset();
-          
+          refetch()
           Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "comment is added to the post",
+            position: 'top-end',
+            icon: 'success',
+            title: 'Comment added to the post',
             showConfirmButton: false,
             timer: 1500,
           });
@@ -90,10 +82,10 @@ const CardDetails = () => {
           console.log(postResponse.data);
         }
       } catch (error) {
-        console.error("Error posting comment:", error);
+        console.error('Error posting comment:', error);
       }
     } else {
-      navigate("/login");
+      navigate('/login');
     }
   };
 
@@ -106,18 +98,18 @@ const CardDetails = () => {
           reset();
 
           Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "You liked the post",
+            position: 'top-end',
+            icon: 'success',
+            title: 'You liked the post',
             showConfirmButton: false,
             timer: 1500,
           });
         }
       } catch (error) {
-        console.error("Error posting comment:", error);
+        console.error('Error posting comment:', error);
       }
     } else {
-      navigate("/login");
+      navigate('/login');
     }
   };
 
@@ -130,18 +122,18 @@ const CardDetails = () => {
           reset();
 
           Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "You disliked the post",
+            position: 'top-end',
+            icon: 'success',
+            title: 'You disliked the post',
             showConfirmButton: false,
             timer: 1500,
           });
         }
       } catch (error) {
-        console.error("Error posting comment:", error);
+        console.error('Error posting comment:', error);
       }
     } else {
-      navigate("/login");
+      navigate('/login');
     }
   };
 
@@ -150,12 +142,12 @@ const CardDetails = () => {
       <div className="grid md:grid-cols-2 mt-4 gap-6">
         <div className="md:border md:border-teal-300">
           <img className="h-[250px] md:h-[500px] w-full" src={image} alt="" />
-          <h2 className="text-center text-2xl font-bold">Author Name:{name}</h2>
+          <h2 className="text-center text-2xl font-bold">Author Name: {name}</h2>
         </div>
 
         <div>
           <h1 className="font-bold text-xl">Title: {title}</h1>
-          <h2 className="font-semibold text-xl mt-4">Post Description:{description}</h2>
+          <h2 className="font-semibold text-xl mt-4">Post Description: {description}</h2>
 
           <h2 className="font-bold text-xl mt-4 ">Tag: {tag}</h2>
 
@@ -188,7 +180,7 @@ const CardDetails = () => {
                 <span className="label-text text-xl font-bold"></span>
               </label>
               <textarea
-                {...register("description")}
+                {...register('description')}
                 className="textarea textarea-bordered border-teal-400 h-24"
                 placeholder="Please give your comment here"
               ></textarea>
@@ -196,21 +188,25 @@ const CardDetails = () => {
             </div>
           </form>
         </div>
-        
       </div>
+
       <div>
         <h2 className="font-bold">Recent Comment</h2>
-        {
-          comment.map(item=> <div className="font-bold text-xl mb-4" key={item._id}>
-           <p>{ item.commentDes}</p>
-           <h2>from ({item.userEmail})</h2>
+        {comment.map((item) => (
+          <div className="font-bold text-xl mb-4" key={item._id}>
+            <p>{item.commentDes}</p>
+            <h2>from ({item.userEmail})</h2>
           </div>
-           
-           
-        
-         
-          )
-        }
+        ))}
+      </div>
+
+      <div className="flex gap-2 mt-4">
+        <h2 className="mt-2 font-bold">Share on Facebook:</h2>
+        <FacebookShareButton url={postUrl}>
+          <button className="btn btn-warning hover:bg-teal-300">
+            <FaFacebook className="text-2xl" />
+          </button>
+        </FacebookShareButton>
       </div>
     </div>
   );
