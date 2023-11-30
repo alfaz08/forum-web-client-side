@@ -156,13 +156,27 @@ const CardDetails = () => {
           <div className="flex gap-2 mt-4">
             <h2 className="mt-2 font-bold">Give your reaction on this post: </h2>
 
+            {
+              user?.email===email ?
+              <button disabled onClick={() => handleUpVote(id)} className="btn btn-warning hover:bg-teal-300">
+              <AiFillLike className="text-2xl " />
+            </button>
+            :
             <button onClick={() => handleUpVote(id)} className="btn btn-warning hover:bg-teal-300">
               <AiFillLike className="text-2xl " />
             </button>
+            }
 
+            {
+              user?.email === email ?
+              <button disabled onClick={() => handleDownVote(id)} className="btn ml-4 btn-warning hover:bg-teal-300">
+              <AiFillDislike className=" text-2xl  " />
+            </button>
+            :
             <button onClick={() => handleDownVote(id)} className="btn ml-4 btn-warning hover:bg-teal-300">
               <AiFillDislike className=" text-2xl  " />
             </button>
+            }
           </div>
 
           <div className="bg-teal-300 flex justify-between items-center sm:w-[200px] md:w-[400px] h-[100px] rounded-lg mt-4">
@@ -184,7 +198,12 @@ const CardDetails = () => {
                 className="textarea textarea-bordered border-teal-400 h-24"
                 placeholder="Please give your comment here"
               ></textarea>
-              <button className="btn btn-warning hover:text-white hover:bg-black">Add Comment</button>
+              {
+                user?.email === email ?
+                <button disabled className="btn btn-warning hover:text-white hover:bg-black">Add Comment</button>
+                :
+                <button className="btn btn-warning hover:text-white hover:bg-black">Add Comment</button>
+              }
             </div>
           </form>
         </div>

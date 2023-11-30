@@ -24,7 +24,7 @@ const Cards = () => {
         <div className="flex justify-end gap-4">
           
           <div>
-            <button className="btn mr-12 btn-warning hover:text-white hover:bg-black" onClick={toggleSortByPopularity}>
+            <button className="btn mt-4 mr-12 btn-warning hover:text-white hover:bg-black" onClick={toggleSortByPopularity}>
               Sort By Popularity
             </button>
           </div>

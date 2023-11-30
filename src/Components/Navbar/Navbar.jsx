@@ -30,7 +30,7 @@ const Navbar = () => {
       <li className="bg-teal-200 rounded-lg">
         <div className="bg-teal-300">
           <HiMiniBellAlert className=" text-4xl" />
-          <div className="badge bg-teal-300 font-bold">+{announcement.length}</div>
+          <div className="badge bg-teal-300 font-bold">{announcement.length}</div>
         </div>
       </li>
       <li className="text-xl"><NavLink to="/contact" >Contact</NavLink></li>

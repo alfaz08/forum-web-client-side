@@ -1,8 +1,15 @@
-# React + Vite
+# Project Title: OpinionOverflow Web With MERN Stack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- User can log in with email and password
+-User can share different opinion on different topic
+- User can see post after login comment and like-silike those post
+- User can report for spam comment
+- User can be a Gold member using money
+- Admin can take action again spam comment
+- Admin can see total member,revenue,post,comment
+- User Dashboard and Admin Dasboard
+
+## Live Link: https://opinion-overflow-web.web.app/
