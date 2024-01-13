@@ -303,7 +303,9 @@ const CardDetails = () => {
     ))
   }
 </div>
+   
 
+   fsjkhsdfhkj
       
     </div>
   );
