@@ -16,7 +16,7 @@ const Home = () => {
   return (
     <div >
     <Banner></Banner>
-    
+ 
      <div className="container mx-auto ">
       {
         announcement?.length >0 ?

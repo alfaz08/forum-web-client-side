@@ -1,0 +1,13 @@
+.container {
+  position: relative;
+  
+ 
+}
+.bottom-left {
+  position: absolute;
+  top: 8px;
+}
+.bottom-right {
+  position: absolute;
+  top: 450px;
+}
