@@ -11,15 +11,15 @@ const AnnounceDetails = () => {
     <div className=" max-w-5xl mx-auto mt-8 mb-8">
       <div className="flex">
       <button className="btn btn-warning">Announcement</button>
-      {/* <Marquee>
-      I can be a React component, multipleczxzxc React components, or just some text.
-      </Marquee> */}
-     {announcement?.map(item => (
-  <Marquee key={item._id} pauseOnHover={true} speed={100} className="marquee-item">
-    <h2 className="text-xl font-bold text-red-600 mr-2">{item.title}</h2>
-    <h2 className="text-lg mr-2">{item.description}</h2>
-  </Marquee>
-))}
+      <Marquee pauseOnHover={true} speed={50} className="marquee-item bg-gray-100">
+  {announcement.map((item, index) => (
+    <span key={item._id}>
+      <span className='mt-4 text-red-600 font-bold'> {item.title}</span>
+      <span className='mt-4'> {item.description}</span>
+      {index < announcement.length  && '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0'} {/* Non-breaking spaces */}
+    </span>
+  ))}
+</Marquee>
     </div>
     </div>
   );
